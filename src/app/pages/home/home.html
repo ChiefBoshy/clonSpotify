@@ -1,0 +1,36 @@
+<div class="mx-[8%] my-5 text-white">
+  <h2 class="mb-5 text-2xl font-bold">
+    Feed Musical
+  </h2>
+  <div>
+        
+        @if (!cargando && !error) {
+        <p class="mb-4 text-sm text-gray-400">
+            {{ cantidadCanciones }} canciones encontradas
+        </p>
+        }
+  </div>
+
+  @if (cargando) {
+     <div class="loader">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+    <p class="text-gray-400"></p>
+  } @else if (error) {
+    <p class="text-red-400">Error al cargar las canciones.</p>
+  } @else if (canciones.length === 0) {
+    <p class="text-gray-400">No se encontraron canciones.</p>
+  } @else {
+    <div class="space-y-1" >
+      @for (cancion of canciones; track cancion.id; let i = $index) {
+        <app-track
+            @trackAnimation
+            [track]="cancion"
+            [index]="i + 1"
+        />
+        }
+    </div>
+  }
+</div>

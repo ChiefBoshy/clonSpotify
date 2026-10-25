@@ -1,0 +1,8 @@
+
+<app-dashboard></app-dashboard>
+
+<main [@pageAnimation]="routeState">
+  <router-outlet
+    (activate)="routeState = $event.constructor.name"
+  />
+</main>

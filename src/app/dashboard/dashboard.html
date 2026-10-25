@@ -1,0 +1,103 @@
+
+<div class="flex items-center gap-6 h-16 mx-[8%]">
+
+  <div class="flex-shrink-0 flex items-center">
+    <a [routerLink]="['/home']">
+      <span class="font-bold text-xl tracking-wider uppercase whitespace-nowrap">
+        ELEK<span class="color-accent">TRIFY</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="flex-1 min-w-0">
+    <form
+      (ngSubmit)="buscar()"
+      class="flex items-center w-full rounded-lg transition duration-200">
+
+      <input
+        type="text"
+        [(ngModel)]="terminoBusqueda"
+        name="busqueda"
+        placeholder="Buscar"
+        aria-label="Buscar productos"
+        class="flex-1 min-w-0 bg-transparent text-gray-200
+               placeholder-gray-500 px-4 py-2.5
+               text-sm outline-none"
+      />
+
+      <button
+        type="submit"
+        aria-label="Buscar"
+        class="flex-shrink-0 mx-2 flex items-center justify-center
+               text-gray-300 hover:text-white
+               px-3 py-2.5 transition duration-200">
+
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <circle cx="11" cy="11" r="7" stroke-width="2" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m16 16 4 4" />
+        </svg>
+      </button>
+    </form>
+  </div>
+<div class="hidden md:flex flex-shrink-0 items-center gap-4">
+
+  @if (sessionStorage.isLoggedIn()) {
+    <button
+      (click)="sessionStorage.logout()"
+      class="color-surface color-primary-text 
+             font-semibold px-5 py-2 rounded-lg transition duration-200">
+      Cerrar sesión
+    </button>
+  } @else {
+    <a
+      [routerLink]="['/login']"
+      [queryParams]="{ modo: 'login' }">
+
+      <button
+        class="color-surface color-primary-text 
+               font-semibold px-5 py-2 rounded-lg transition duration-200">
+        Login
+      </button>
+    </a>
+  }
+
+</div>
+
+  <div class="md:hidden flex-shrink-0 flex items-center">
+    <button
+      (click)="toggleMenu()"
+      class="inline-flex items-center justify-center p-2 rounded-md
+             color-light color-toggle-hover focus:outline-none
+             transition duration-200">
+
+      <svg
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor">
+        @if (!isMenuOpen) {
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16" />
+        } @else {
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12" />
+        }
+      </svg>
+    </button>
+  </div>
+
+</div>

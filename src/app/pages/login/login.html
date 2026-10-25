@@ -1,0 +1,76 @@
+
+<div class="flex justify-center items-center min-h-screen">
+  <div class="w-[60%] mt-4">
+
+    @switch (tipoFormulario) {
+      @case ('register') {
+        <form [formGroup]="formRegistro" (ngSubmit)="onSubmitRegistro()">
+          <h2 class="text-3xl">Registrar Usuario</h2>
+
+          <div class="my-2">
+            <label for="name">Nombre</label>
+            <input id="name" type="text" formControlName="name">
+          </div>
+
+          <div class="my-2">
+            <label for="pwd">Password</label>
+            <input id="pwd" type="password" formControlName="pwd">
+          </div>
+
+          <div class="my-2">
+            <label for="repassword">Repetir Contraseña</label>
+            <input id="repassword" type="password" formControlName="repassword">
+
+            @if (formRegistro.hasError('passwordMismatch') && formRegistro.get('repassword')?.touched) {
+              <small class="text-red-500 block mt-1">
+                Las contraseñas no coinciden.
+              </small>
+            }
+          </div>
+
+          <div class="my-4 flex justify-end">
+            <button type="submit">Guardar</button>
+          </div>
+
+          <p class="text-center mt-4"  (click)="tipoFormulario = 'login'">
+            ¿Ya tienes cuenta? Iniciar sesión
+         
+          </p>
+        </form>
+      }
+
+      @case ('login') {
+        <form [formGroup]="formLogin" (ngSubmit)="onSubmitLogin()">
+          <h2 class="text-3xl">Iniciar Sesión</h2>
+
+          <div class="my-2">
+            <label for="login-name">Nombre</label>
+            <input id="login-name" type="text" formControlName="name">
+          </div>
+
+          <div class="my-2">
+            <label for="login-pwd">Password</label>
+            <input id="login-pwd" type="password" formControlName="pwd">
+          </div>
+
+          <div class="my-4 flex justify-end">
+            <button type="submit">Ingresar</button>
+          </div>
+
+          <p class="text-center mt-4" (click)="tipoFormulario = 'register'" >
+            ¿No tienes cuenta?  Crear una
+            
+          </p>
+        </form>
+      }
+
+      @default {
+        <div class="text-center">
+          <p>Error 404</p>
+        </div>
+      }
+    }
+
+  </div>
+</div>
+```

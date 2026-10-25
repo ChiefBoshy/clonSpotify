@@ -1,0 +1,13 @@
+@if (isOpen()) {
+  <div class="modal-overlay">
+    <div class="modal-box">
+      <h2>{{ title() }}</h2>
+      <hr>
+      <div class="modal-body">
+        <ng-content />
+      </div>
+      <hr>
+      <button (click)="cerrarModal()">Cerrar Modal</button>
+    </div>
+  </div>
+}
