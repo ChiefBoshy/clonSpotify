@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 @Component({
   imports: [FormsModule,CommonModule],
@@ -14,17 +15,20 @@ export class AesEjemplo {
   textoCifrado = '';
   mensaje = '';
 
-  private readonly clave = '0123456789abcdef0123456789abcdef';
+   private readonly clave = environment.aesKey;
 
+  // _usar promesa para crypto async
   private async obtenerClave(): Promise<CryptoKey> {
-    return crypto.subtle.importKey(
-      'raw',
-      new TextEncoder().encode(this.clave),
-      { name: 'AES-GCM' },
-      false,
-      ['encrypt', 'decrypt']
-    );
-  }
+  const rawKey = new TextEncoder().encode(environment.aesKey);
+
+  return crypto.subtle.importKey(
+    'raw',
+    rawKey,
+    { name: 'AES-GCM' },
+    false,
+    ['encrypt', 'decrypt']
+  );
+}
 
   async cifrar(): Promise<void> {
     try {
