@@ -1,8 +1,10 @@
 import { Component, input ,computed, inject} from '@angular/core';
 import { SpotifyTrack } from '../../models/SpotifyTrack';
 import { Router } from '@angular/router';
+import { tableAnimation } from '../../animations/tableAnimation';
 @Component({
   imports: [],
+  animations:[tableAnimation],
   selector: 'app-track',
   styleUrl: './track.scss',
   templateUrl: './track.html',

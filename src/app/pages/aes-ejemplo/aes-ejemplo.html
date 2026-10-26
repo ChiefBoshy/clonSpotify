@@ -1,0 +1,60 @@
+<div class="aes-container mx-[8%] my-10 space-y-5 text-white">
+
+  <h2 class="mb-8 text-2xl font-bold tracking-wide">
+    Cifrado <span class="text-green-500">AES</span>
+  </h2>
+
+  <div class="space-y-2">
+    <label class="block text-sm font-medium text-gray-300">
+      Texto original / descifrado
+    </label>
+
+    <input
+      type="text"
+      [(ngModel)]="texto"
+      placeholder="Escribe un texto..."
+      class="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-3
+             text-white placeholder-gray-500 outline-none transition
+             focus:border-green-500 focus:ring-1 focus:ring-green-500"
+    />
+  </div>
+
+  <button
+    (click)="cifrar()"
+    class="rounded-lg bg-green-600 px-6 py-3 font-semibold text-white
+           transition hover:bg-green-500 active:scale-[0.98]"
+  >
+    Cifrar AES
+  </button>
+
+  <div class="space-y-2 pt-4">
+    <label class="block text-sm font-medium text-gray-300">
+      Texto cifrado (Base64)
+    </label>
+
+    <input
+      type="text"
+      [(ngModel)]="textoCifrado"
+      placeholder="Pega el texto cifrado..."
+      class="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-3
+             text-white placeholder-gray-500 outline-none transition
+             focus:border-green-500 focus:ring-1 focus:ring-green-500"
+    />
+  </div>
+
+  <button
+    (click)="descifrar()"
+    class="rounded-lg border border-green-600 px-6 py-3 font-semibold
+           text-green-400 transition hover:bg-green-600 hover:text-white
+           active:scale-[0.98]"
+  >
+    Descifrar AES
+  </button>
+
+  @if (mensaje) {
+    <p class="rounded-lg bg-gray-900 px-4 py-3 text-sm text-gray-300">
+      {{ mensaje }}
+    </p>
+  }
+
+</div>
