@@ -28,7 +28,7 @@
     ngOnInit() {
       this.formRegistro = this.fb.group({
         name: ['', Validators.required],
-        pwd: ['', [Validators.required, Validators.minLength(6)]],
+        pwd: ['', [Validators.required]],
         repassword: ['', Validators.required]
       }, { validators: this.passwordMatchValidator }); // Asignado al grupo
 

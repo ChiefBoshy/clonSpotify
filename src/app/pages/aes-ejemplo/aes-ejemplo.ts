@@ -38,18 +38,22 @@ export class AesEjemplo {
       }
 
       const clave = await this.obtenerClave();
+      // _generar bites para cifrados raandoms
       const iv = crypto.getRandomValues(new Uint8Array(12));
-
+      // cifrar
       const resultado = await crypto.subtle.encrypt(
         { name: 'AES-GCM', iv },
         clave,
         new TextEncoder().encode(this.texto)
       );
 
+      // guarda los bites aleatorios en un array junto con el cifrado
+      // asi se le pueden sacar los bites para descifrar
       const bytes = new Uint8Array(12 + resultado.byteLength);
       bytes.set(iv, 0);
       bytes.set(new Uint8Array(resultado), 12);
 
+      // convierte a base64 para poder imprimirlos
       this.textoCifrado = btoa(
         Array.from(bytes, b => String.fromCharCode(b)).join('')
       );
@@ -67,6 +71,7 @@ export class AesEjemplo {
         return;
       }
 
+      // convertir a bites
       const bytes = Uint8Array.from(
         atob(this.textoCifrado),
         c => c.charCodeAt(0)
@@ -76,10 +81,12 @@ export class AesEjemplo {
         throw new Error('Texto cifrado inválido');
       }
 
+      // sacar los bites random
       const iv = bytes.slice(0, 12);
       const datos = bytes.slice(12);
       const clave = await this.obtenerClave();
 
+      // desencriptamos
       const resultado = await crypto.subtle.decrypt(
         { name: 'AES-GCM', iv },
         clave,
